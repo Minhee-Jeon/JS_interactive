@@ -1,4 +1,26 @@
 @charset 'utf-8';
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 900;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.ttf') format("truetype");
+    font-display: swap;
+}
 
 html {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
@@ -20,10 +42,12 @@ a {
 
 .global-nav{
     height: 44px;
+    padding: 0 1rem;
 }
 .local-nav {
     height: 52px;
     border-bottom: 1px solid #ddd;
+    padding: 0 1rem;
 }
 .global-nav-links,
 .local-nav-links {
@@ -44,4 +68,108 @@ a {
 .local-nav-links a:not(.product-name) {
     margin-left: 2em;
     font-size:0.8rem;
+}
+.scroll-section {
+    padding-top: 50vh;
+}
+#scroll-section-0 h1 {
+    font-size: 4rem;
+    text-align: center;
+}
+.main-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+    height: 3em;
+    font-size:2.4rem;
+}
+.main-message p {
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+}
+.main-message small {
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 1.2rem;
+}
+.description {
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    color:#888;
+}
+.description strong {
+    margin-right: 0.2em;
+    font-size: 3rem;
+    color: rgb(29, 29, 31);
+}
+#scroll-section-2 .main-message{
+    font-size: 3.5rem;
+}
+.desc-message {
+    width: 50%;
+    font-weight: bold;
+}
+.pin {
+    width: 1px;
+    height: 100px;
+    background: rgb(29, 29, 31);
+}
+.mid-message {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    font-size: 2rem;
+    color: #888;
+}
+.mid-message strong {
+    color: rgb(29, 29, 31);
+}
+.canvas-caption {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    color:#888;
+}
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    background: darkorange;
+}
+
+/*기존 사이즈는 모바일 기준, 여기서부터 웹 기준*/
+@media (min-width: 1024px) {
+    #scroll-section-0 h1 {
+        font-size: 9vw;
+    }
+    .main-message {
+        font-size: 4vw;
+    }
+    .description {
+        font-size: 2rem;
+    }
+    .description strong {
+        font-size: 6rem;
+    }
+    #scroll-section-2 .main-message {
+        font-size: 6vw;
+    }
+    .main-message small {
+        font-size: 1.5vw;
+    }
+    .desc-message {
+        width: 20%;
+    }
+    .mid-message {
+        font-size: 4vw;
+    }
+    .canvas-caption {
+        font-size: 2rem;
+    }
 }
