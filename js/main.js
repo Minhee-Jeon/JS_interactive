@@ -4,6 +4,7 @@
     let yOffset = 0; // window.pageYOffset(deprecated) -> window.scrollY 대신 쓸 변수
     let prevScrollHeight = 0; // 현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 세션들의 스크롤 높이값의 합
     let curScene = 0; // 현재 활성화되어 보고 있는 scene 인덱스(scroll-section)
+    let enterNewScene = false; // 새로운 scene이 시작되는 순간 true
 
     const sceneInfo = [
         {
@@ -13,7 +14,14 @@
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-0'),
+                messageA: document.querySelector('#scroll-section-0 .main-message.a'),
+                messageB: document.querySelector('#scroll-section-0 .main-message.b'),
+                messageC: document.querySelector('#scroll-section-0 .main-message.c'),
+                messageD: document.querySelector('#scroll-section-0 .main-message.d'),
             },
+            values: {
+                messageA_opacity: [0, 1]
+            }
         },
         {
             // 1
@@ -63,21 +71,60 @@
         document.body.setAttribute('id', `show-scene-${curScene}`)
     }
   
+    function calcValues(values, currentYOffset) {
+        let rv;
+        // 현재 씬 (스크롤섹션)에서 스크롤된 범위를 비율로 구하기
+        let scrollRatio = currentYOffset / sceneInfo[curScene].scrollHeight;
+
+        rv = scrollRatio * (values[1] - values[0]) + values[0];
+        return rv;
+    }
+
+    function playAnimation() {
+        const objs = sceneInfo[curScene].objs;
+        const values = sceneInfo[curScene].values;
+        const currentYOffset = yOffset - prevScrollHeight;
+        console.log(curScene);
+
+        switch(curScene) {
+            case 0:
+                let messageA_opacity_in = calcValues(values.messageA_opacity, currentYOffset);
+                objs.messageA.style.opacity = messageA_opacity_in;
+                console.log(messageA_opacity_in);
+                break;
+            case 1:
+                console.log('1 play');
+                break;
+            case 2:
+                console.log('2 play');
+                break;
+            case 3:
+                console.log('3 play');
+                break;
+        }
+    }
 
     function scrollLoop() {
+        enterNewScene = false;
         prevScrollHeight = 0;
         for (let i = 0; i < curScene; i++) {
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
         if (yOffset > prevScrollHeight + sceneInfo[curScene].scrollHeight) {
+            enterNewScene = true;
             curScene++;
             document.body.setAttribute('id',`show-scene-${curScene}`);
         }
         if (yOffset < prevScrollHeight) {
+            enterNewScene = true;
             if (curScene === 0) return; // browser bounce 효과로 인해 음수가 되는 것을 방지 (모바일)
             curScene--;
             document.body.setAttribute('id',`show-scene-${curScene}`);
         }
+        // 씬이 바뀌는 찰나의 순간 스크롤 높이가 음수가 되는데, 이 순간엔 리턴함
+        if (enterNewScene) return;
+
+        playAnimation();
     }
 
     window.addEventListener('load', setLayout);
